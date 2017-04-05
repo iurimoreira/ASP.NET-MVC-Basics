@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Livraria.Models.LivroViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+<div>
+    @Html.ActionLink("ADICIONAR NOVO LIVRO", "Create")
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Ver todos os empréstimos", "Index", "Emprestimo", null, new{ area = "" })
+</div>
+<br />
+<br />
+<br />
+<br />
+
+    @foreach (var livro in Model)
+    {
+        <table class="table">
+            <tr>
+                <td><strong>Identificador:</strong> @Html.DisplayFor(modelItem => livro.id)</td>
+            </tr>
+            <tr>
+                <td><strong>Título:</strong> @Html.DisplayFor(modelItem => livro.titulo)</td>
+            </tr>
+            <tr>
+                <td><strong>Autor:</strong> @Html.DisplayFor(modelItem => livro.autor)</td>
+            </tr>
+            <tr>
+                <td><strong>Editora:</strong> @Html.DisplayFor(modelItem => livro.editora)</td>
+            </tr>
+            <tr>
+                <td><strong>Ano de publicação:</strong> @Html.DisplayFor(modelItem => livro.ano)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = livro.id }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = livro.id }, new { onclick = "return confirm('Tem certeza que você deseja deletar esse livro?');" }) |
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = livro.id })
+                </td>
+            </tr> 
+
+        </table>
+        <br />
+    }
+        

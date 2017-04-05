@@ -1,0 +1,30 @@
+﻿@model Livraria.Models.LivroViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+@Html.HiddenFor(model => model.id)
+    
+        <table class="table">
+            
+            <tr>
+                <td><strong>Título:</strong> @Html.DisplayFor(model => model.titulo)</td>
+            </tr>
+            <tr>
+                <td><strong>Autor:</strong> @Html.DisplayFor(model => model.autor)</td>
+            </tr>
+            <tr>
+                <td><strong>Editora:</strong> @Html.DisplayFor(model => model.editora)</td>
+            </tr>
+            <tr>
+                <td><strong>Ano de publicação:</strong> @Html.DisplayFor(model => model.ano)</td>
+            </tr>
+           
+
+        </table>
+        <br />
+    <div>
+         @Html.ActionLink("Voltar para a home", "Index")
+    </div>
+        

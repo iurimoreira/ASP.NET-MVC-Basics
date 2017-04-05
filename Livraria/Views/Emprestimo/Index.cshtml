@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Livraria.Models.EmprestimoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+<div>
+    @Html.ActionLink("ADICIONAR NOVO EMPRÉSTIMO", "Create")
+</div>
+<br />
+<br />
+<br />
+<br />
+
+
+
+@foreach (var emprestimo in Model)
+{
+    <table class="table">
+        <tr>
+            <td><strong>Identificador:</strong> @Html.DisplayFor(modelItem => emprestimo.id)</td>
+        </tr>
+        <tr>
+            <td><strong>Data de empréstimo:</strong> @Html.DisplayFor(modelItem => emprestimo.dataEmprestimo)</td>
+        </tr>
+        <tr>
+            <td><strong>Data de devolução:</strong> @Html.DisplayFor(modelItem => emprestimo.dataDevolucao)</td>
+        </tr>
+        <tr>
+            <td><strong>Identificador do livro:</strong> @Html.DisplayFor(modelItem => emprestimo.idLivro)</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = emprestimo.id }) |
+                
+            </td>
+        </tr> 
+        
+    </table>
+        <br />
+}
