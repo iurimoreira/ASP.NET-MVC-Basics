@@ -23,6 +23,24 @@
 
 /*------- Códigos de ajuste ------- */
 
+footer {
+    bottom:0;
+    width:100%;
+}
+
+    footer p {
+        text-align:center;
+        padding-top: 1em;
+
+    }
+
+.titulo-pagina {
+    font-weight: bold;
+    font-size: 3em;
+    margin-top: 0 !important;
+    margin-bottom: 1em;
+}
+
 .bt-verde {
     background-color: #38d332;
     color: white;
@@ -814,6 +832,7 @@ pre code {
 
 .body-content {
  padding-top: 8em;
+ min-height: 420px;
 }
 
 .container:before,
@@ -4317,10 +4336,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
     text-transform:uppercase;
     font-size:1em;
     text-decoration: underline;
+    padding-right: 2em;
 }
 
-.menu-principal .menu-principal-item:first-child {
-    padding-right:2em;
+.menu-principal .menu-principal-item:last-child {
+    padding-right:0 !important;
 }
 
 .navbar-nav > li > a {

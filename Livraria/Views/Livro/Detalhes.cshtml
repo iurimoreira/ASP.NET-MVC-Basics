@@ -20,6 +20,14 @@
             <tr>
                 <td><strong>Ano de publicação:</strong> @Html.DisplayFor(model => model.ano)</td>
             </tr>
+            <tr>
+                <td><strong>Id do livro:</strong> @Html.DisplayFor(model => model.id)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Voltar", "Index", new { area="" }, new { @class = "bt-verde" })
+                </td>
+            </tr> 
            
         </table>
         <br />

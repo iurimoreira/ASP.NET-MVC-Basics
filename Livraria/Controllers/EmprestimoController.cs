@@ -1,5 +1,7 @@
-﻿using Livraria.Models;
+﻿using Livraria.Domain;
+using Livraria.Models;
 using Livraria.Repository;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,16 +12,18 @@ namespace Livraria.Controllers
         // GET: Emprestimo
         public ActionResult Index()
         {
-            var repository = new EmprestimoRepository();
+            var repositoryEmprestimos = new EmprestimoRepository();
 
-            var emprestimos = repository.GetAllEmprestimos();
+            var emprestimos = repositoryEmprestimos.GetAllEmprestimos();
+
             return View(
                 emprestimos.Select(a => new EmprestimoViewModel()
                 {
                     id = a.id,
                     dataEmprestimo = a.dataEmprestimo,
                     dataDevolucao = a.dataDevolucao,
-                    idLivro = a.idLivro
+                    idLivro = a.idLivro,
+                    nomeDoLivro = a.nomeDoLivro
                 }));
         }
 
@@ -70,7 +74,6 @@ namespace Livraria.Controllers
             emprestimoVM.dataDevolucao = emprestimo.dataDevolucao;
             emprestimoVM.idLivro = emprestimo.idLivro;
 
-
             return View(emprestimoVM);
         }
 
@@ -90,6 +93,23 @@ namespace Livraria.Controllers
                 e.idLivro = emprestimo.idLivro;
                
                 repository.UpdateEmprestimo(e);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Livro/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var repository = new EmprestimoRepository();
+
+            try
+            {
+                repository.DeleteEmprestimo(id);
 
                 return RedirectToAction("Index");
             }

@@ -14,7 +14,8 @@ namespace Livraria.Repository
 
             using (var connection = new SqlConnection(connectionString))
             {
-                var commandText = "SELECT * FROM Emprestimo";
+                //var commandText = "SELECT * FROM Emprestimo";
+                var commandText = "SELECT Emprestimo.Id, Emprestimo.dataEmprestimo, Emprestimo.dataDevolucao, Emprestimo.IdLivro, Livro.titulo FROM Emprestimo INNER JOIN Livro ON Emprestimo.IdLivro = Livro.Id";
                 var selectCommand = new SqlCommand(commandText, connection);
 
                 Emprestimo emprestimo = null;
@@ -33,6 +34,7 @@ namespace Livraria.Repository
                             emprestimo.dataEmprestimo = (DateTime)reader["dataEmprestimo"];
                             emprestimo.dataDevolucao = (DateTime)reader["dataDevolucao"];
                             emprestimo.idLivro = (int)reader["IdLivro"];
+                            emprestimo.nomeDoLivro = reader["titulo"].ToString();
                             
                             emprestimos.Add(emprestimo);
                         }
@@ -63,7 +65,6 @@ namespace Livraria.Repository
                 }
                 finally
                 {
-
                     connection.Close();
                 }
             }
@@ -115,6 +116,25 @@ namespace Livraria.Repository
                 cmd.Parameters.AddWithValue("@dataEmprestimo", emprestimo.dataEmprestimo);
                 cmd.Parameters.AddWithValue("@dataDevolucao", emprestimo.dataDevolucao);
                 cmd.Parameters.AddWithValue("@IdLivro", emprestimo.idLivro);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void DeleteEmprestimo(int id)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                string sql = "DELETE FROM Emprestimo WHERE Id=@cod";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@cod", id);
                 try
                 {
                     conn.Open();
