@@ -4,7 +4,21 @@ using System.Data.SqlClient;
 
 namespace Livraria.Repository
 {
-    public class LivroRepository
+    public interface ILivroRepository {
+
+        IEnumerable<Livro> GetAllLivros();
+
+        Livro GetLivroById(int id);
+
+        void CreateLivro(Livro livro);
+
+        void DeleteLivro(int id);
+
+        void UpdateLivro(Livro livro);
+
+    }
+
+    public class LivroRepository : ILivroRepository
     {
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Livraria.mdf;Integrated Security=True";
 
@@ -85,7 +99,7 @@ namespace Livraria.Repository
             }
         }
 
-        internal void CreateLivro(Livro livro)
+        public void CreateLivro(Livro livro)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -109,7 +123,7 @@ namespace Livraria.Repository
             }
         }
 
-        internal void DeleteLivro(int id)
+        public void DeleteLivro(int id)
         {
 
             using (var conn = new SqlConnection(connectionString))
@@ -129,7 +143,7 @@ namespace Livraria.Repository
             }
         }
 
-        internal void UpdateLivro(Livro livro)
+        public void UpdateLivro(Livro livro)
         {
             using (var conn = new SqlConnection(connectionString))
             {

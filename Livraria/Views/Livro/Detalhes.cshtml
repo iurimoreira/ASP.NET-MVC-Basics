@@ -9,7 +9,7 @@
         <table class="table">
             
             <tr>
-                <td><strong>Título:</strong> @Html.DisplayFor(model => model.titulo)</td>
+                <td><h3 class="titulo-livro">@Html.DisplayFor(model => model.titulo)</h3></td>
             </tr>
             <tr>
                 <td><strong>Autor:</strong> @Html.DisplayFor(model => model.autor)</td>
@@ -21,10 +21,7 @@
                 <td><strong>Ano de publicação:</strong> @Html.DisplayFor(model => model.ano)</td>
             </tr>
            
-
         </table>
         <br />
-    <div>
-         @Html.ActionLink("Voltar para a home", "Index")
-    </div>
+
         
