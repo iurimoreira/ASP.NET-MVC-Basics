@@ -4,48 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<br />
-<br />
-<br />
-<br />
-<div>
-    @Html.ActionLink("ADICIONAR NOVO LIVRO", "Create")
-</div>
-<br />
-<br />
-<div>
-    @Html.ActionLink("Ver todos os empréstimos", "Index", "Emprestimo", null, new{ area = "" })
-</div>
-<br />
-<br />
-<br />
-<br />
 
     @foreach (var livro in Model)
     {
         <table class="table">
+            
             <tr>
-                <td><strong>Identificador:</strong> @Html.DisplayFor(modelItem => livro.id)</td>
+                <td><h3 class="titulo-livro">@Html.DisplayFor(modelItem => livro.titulo)</h3></td>
             </tr>
             <tr>
-                <td><strong>Título:</strong> @Html.DisplayFor(modelItem => livro.titulo)</td>
-            </tr>
-            <tr>
-                <td><strong>Autor:</strong> @Html.DisplayFor(modelItem => livro.autor)</td>
-            </tr>
-            <tr>
-                <td><strong>Editora:</strong> @Html.DisplayFor(modelItem => livro.editora)</td>
-            </tr>
-            <tr>
-                <td><strong>Ano de publicação:</strong> @Html.DisplayFor(modelItem => livro.ano)</td>
+                <td class="autor-livro"><strong>Autor:</strong> @Html.DisplayFor(modelItem => livro.autor)</td>
             </tr>
             <tr>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = livro.id }) |
-                    @Html.ActionLink("Deletar", "Delete", new { id = livro.id }, new { onclick = "return confirm('Tem certeza que você deseja deletar esse livro?');" }) |
-                    @Html.ActionLink("Detalhes", "Detalhes", new { id = livro.id })
+                    @Html.ActionLink("Editar", "Edit", new { id = livro.id }, new { @class = "bt-verde" })
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = livro.id }, new { @class = "bt-verde" })
                 </td>
             </tr> 
+            <td class="div-id-livro">
+                <a href="@Url.Action("Delete", new { id = livro.id })" onclick = "return confirm('Tem certeza que você deseja deletar esse livro?');" >
+                    <img class="bt-fechar" src="~/Content/Imagens/bt_deletar.svg" alt="Deletar" />
+                </a>
+            </td>
 
         </table>
         <br />

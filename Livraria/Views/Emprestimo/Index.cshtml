@@ -4,20 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<br />
-<br />
-<br />
-<br />
-<div>
-    @Html.ActionLink("ADICIONAR NOVO EMPRÉSTIMO", "Create")
-</div>
-<br />
-<br />
-<br />
-<br />
-
-
-
 @foreach (var emprestimo in Model)
 {
     <table class="table">
@@ -35,7 +21,7 @@
         </tr>
         <tr>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = emprestimo.id }) |
+                @Html.ActionLink("Editar", "Edit", new { id = emprestimo.id }, new { @class = "bt-verde" })
                 
             </td>
         </tr> 
