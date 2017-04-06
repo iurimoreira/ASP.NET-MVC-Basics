@@ -71,7 +71,6 @@ namespace Livraria.Repository
 
                 Livro livro = null;
                 
-
                 try
                 {
                     connection.Open();
@@ -85,9 +84,7 @@ namespace Livraria.Repository
                             livro.titulo = reader["titulo"].ToString();
                             livro.autor = reader["autor"].ToString();
                             livro.editora = reader["editora"].ToString();
-                            livro.ano = (int)reader["ano"];
-
-                            
+                            livro.ano = (int)reader["ano"];   
                         }
                     }
                 }
@@ -117,7 +114,6 @@ namespace Livraria.Repository
                 }
                 finally
                 {
-
                     connection.Close();
                 }
             }
@@ -125,7 +121,6 @@ namespace Livraria.Repository
 
         public void DeleteLivro(int id)
         {
-
             using (var conn = new SqlConnection(connectionString))
             {
                 string sql = "DELETE FROM Livro WHERE Id=@cod";

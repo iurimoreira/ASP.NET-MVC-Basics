@@ -1,31 +1,41 @@
-﻿@model IEnumerable<Livraria.Models.EmprestimoViewModel>
+﻿@using System.Linq
+@model IEnumerable<Livraria.Models.EmprestimoViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-@foreach (var emprestimo in Model)
+@if ( !Model.Any() )
 {
-    <table class="table">
-        <tr>
-            <td><strong>Identificador:</strong> @Html.DisplayFor(modelItem => emprestimo.id)</td>
-        </tr>
-        <tr>
-            <td><strong>Data de empréstimo:</strong> @Html.DisplayFor(modelItem => emprestimo.dataEmprestimo)</td>
-        </tr>
-        <tr>
-            <td><strong>Data de devolução:</strong> @Html.DisplayFor(modelItem => emprestimo.dataDevolucao)</td>
-        </tr>
-        <tr>
-            <td><strong>Identificador do livro:</strong> @Html.DisplayFor(modelItem => emprestimo.idLivro)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = emprestimo.id }, new { @class = "bt-verde" })
-                
+    <h3>Nenhum empréstimo cadastrado. @Html.ActionLink("Insira um agora.", "Create")</h3>
+}
+else
+{
+    <h3 class="titulo-pagina">Empréstimos cadastrados</h3>
+
+    foreach (var emprestimo in Model)
+    {
+        <table class="table">
+            <tr>
+                <td><h3 class="titulo-livro">@Html.DisplayFor(modelItem => emprestimo.nomeDoLivro)</h3></td>
+            </tr>
+            <tr>
+                <td><strong>Data de empréstimo:</strong> @Html.DisplayFor(modelItem => emprestimo.dataEmprestimo)</td>
+            </tr>
+            <tr>
+                <td><strong>Data de devolução:</strong> @Html.DisplayFor(modelItem => emprestimo.dataDevolucao)</td>   
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = emprestimo.id }, new { @class = "bt-verde" })
+                </td>
+            </tr> 
+            <td class="div-id-livro">
+                <a href="@Url.Action("Delete", new { id = emprestimo.id })" onclick="return confirm('Tem certeza que você deseja deletar esse empréstimo?');">
+                    <img class="bt-fechar" src="~/Content/Imagens/bt_deletar.svg" alt="Deletar" />
+                </a>
             </td>
-        </tr> 
-        
-    </table>
+        </table>
         <br />
+    }
 }

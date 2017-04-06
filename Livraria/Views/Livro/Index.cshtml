@@ -1,11 +1,19 @@
-﻿@model IEnumerable<Livraria.Models.LivroViewModel>
+﻿@using System.Linq
+@model IEnumerable<Livraria.Models.LivroViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
+@if (!Model.Any())
+{
+    <h3>Nenhum livro cadastrado. @Html.ActionLink("Insira um agora.", "Create")</h3>
+}
+else
+{
+    <h3 class="titulo-pagina">Livros cadastrados</h3>
 
-    @foreach (var livro in Model)
+    foreach (var livro in Model)
     {
         <table class="table">
             
@@ -22,7 +30,7 @@
                 </td>
             </tr> 
             <td class="div-id-livro">
-                <a href="@Url.Action("Delete", new { id = livro.id })" onclick = "return confirm('Tem certeza que você deseja deletar esse livro?');" >
+                <a href="@Url.Action("Delete", new { id = livro.id })" onclick = "return confirm('Tem certeza que você deseja deletar esse livro? Todos os empréstimos ligados a ele também serão deletados do sistema.');" >
                     <img class="bt-fechar" src="~/Content/Imagens/bt_deletar.svg" alt="Deletar" />
                 </a>
             </td>
@@ -30,4 +38,5 @@
         </table>
         <br />
     }
+}
         

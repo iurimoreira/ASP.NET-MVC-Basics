@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Livraria.Models
 {
@@ -23,5 +20,7 @@ namespace Livraria.Models
 
         [Required(ErrorMessage = "Informe o identificador do livro")]
         public int idLivro { get; set; }
+
+        public string nomeDoLivro { get; set; }
     }
 }
