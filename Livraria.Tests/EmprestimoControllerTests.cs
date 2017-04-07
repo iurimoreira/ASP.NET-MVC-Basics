@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Livraria.Repository;
 using Moq;
-using Livraria.Controllers;
 using Livraria.Domain;
+using Livraria.Controllers;
 using System.Web.Mvc;
 using Livraria.Models;
 using System.Linq;
@@ -14,12 +14,12 @@ using FluentAssertions;
 namespace Livraria.Tests
 {
     /// <summary>
-    /// Summary description for LivroControllerTest
+    /// Summary description for EmprestimoControllerTests
     /// </summary>
     [TestClass]
-    public class LivroControllerTest
+    public class EmprestimoControllerTests
     {
-        public LivroControllerTest()
+        public EmprestimoControllerTests()
         {
             //
             // TODO: Add constructor logic here
@@ -66,16 +66,16 @@ namespace Livraria.Tests
         //
         #endregion
 
+
         [TestMethod]
         public void Metodo_Create_Retorna_View_Quando_Model_Is_Invalid()
         {
             // Arrange
-            var mockRepository = new Mock<ILivroRepository>();
-            var controller = new LivroController(mockRepository.Object);
+            var controller = new EmprestimoController();
             controller.ModelState.AddModelError("", "Erro de validação.");
 
             // Act
-            var actionResult = controller.Create(new LivroViewModel());
+            var actionResult = controller.Create(new EmprestimoViewModel());
 
             // Assert
             actionResult.Should().BeOfType<ViewResult>();

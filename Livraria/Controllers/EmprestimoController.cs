@@ -9,6 +9,15 @@ namespace Livraria.Controllers
 {
     public class EmprestimoController : Controller
     {
+        /*
+        private readonly IEmprestimoRepository repositoryEmprestimos;
+
+        public EmprestimoController(IEmprestimoRepository repository)
+        {
+          this.repositoryEmprestimos = repository;
+        }
+        */
+
         // GET: Emprestimo
         public ActionResult Index()
         {
@@ -43,11 +52,11 @@ namespace Livraria.Controllers
         [HttpPost]
         public ActionResult Create(EmprestimoViewModel emprestimo)
         {
+            var repositoryEmprestimos = new EmprestimoRepository();
+
             if (ModelState.IsValid)
             {
-                var repository = new EmprestimoRepository();
-
-                repository.CreateEmprestimo(new Domain.Emprestimo()
+                repositoryEmprestimos.CreateEmprestimo(new Domain.Emprestimo()
                 {
                     id = emprestimo.id,
                     dataEmprestimo = emprestimo.dataEmprestimo,
@@ -63,9 +72,9 @@ namespace Livraria.Controllers
         // GET: Emprestimo/Edit/5
         public ActionResult Edit(int id)
         {
-            var repository = new EmprestimoRepository();
+            var repositoryEmprestimos = new EmprestimoRepository();
 
-            var emprestimo = repository.GetEmprestimoById(id);
+            var emprestimo = repositoryEmprestimos.GetEmprestimoById(id);
 
             EmprestimoViewModel emprestimoVM = new EmprestimoViewModel();
 
@@ -81,10 +90,10 @@ namespace Livraria.Controllers
         [HttpPost]
         public ActionResult Edit(EmprestimoViewModel emprestimo, FormCollection collection)
         {
+            var repositoryEmprestimos = new EmprestimoRepository();
+
             try
             {
-                var repository = new EmprestimoRepository();
-
                 Domain.Emprestimo e = new Domain.Emprestimo();
 
                 e.id = emprestimo.id;
@@ -92,7 +101,7 @@ namespace Livraria.Controllers
                 e.dataDevolucao = emprestimo.dataDevolucao;
                 e.idLivro = emprestimo.idLivro;
                
-                repository.UpdateEmprestimo(e);
+                repositoryEmprestimos.UpdateEmprestimo(e);
 
                 return RedirectToAction("Index");
             }
@@ -105,11 +114,11 @@ namespace Livraria.Controllers
         // GET: Livro/Delete/5
         public ActionResult Delete(int id)
         {
-            var repository = new EmprestimoRepository();
+            var repositoryEmprestimos = new EmprestimoRepository();
 
             try
             {
-                repository.DeleteEmprestimo(id);
+                repositoryEmprestimos.DeleteEmprestimo(id);
 
                 return RedirectToAction("Index");
             }

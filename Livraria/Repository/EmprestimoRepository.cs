@@ -5,7 +5,21 @@ using System.Data.SqlClient;
 
 namespace Livraria.Repository
 {
-    public class EmprestimoRepository
+    public interface IEmprestimoRepository
+    {
+        IEnumerable<Emprestimo> GetAllEmprestimos();
+
+        Emprestimo GetEmprestimoById(int id);
+
+        void CreateEmprestimo(Emprestimo emprestimo);
+
+        void DeleteEmprestimo(int id);
+
+        void UpdateEmprestimo(Emprestimo emprestimo);
+
+    }
+
+    public class EmprestimoRepository : IEmprestimoRepository
     {
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Livraria.mdf;Integrated Security=True";
 
@@ -48,7 +62,7 @@ namespace Livraria.Repository
             }
         }
 
-        internal void CreateEmprestimo(Emprestimo emprestimo)
+        public void CreateEmprestimo(Emprestimo emprestimo)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -106,7 +120,7 @@ namespace Livraria.Repository
             }
         }
 
-        internal void UpdateEmprestimo(Emprestimo emprestimo)
+        public void UpdateEmprestimo(Emprestimo emprestimo)
         {
             using (var conn = new SqlConnection(connectionString))
             {
